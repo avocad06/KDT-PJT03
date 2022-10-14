@@ -55,3 +55,12 @@ def index(request):
     
     # 유저객체에 대한 정보를 템플릿에 출력한다.
     return render(request, "accounts/index.html", context)
+
+# 회원 정보 조회
+def detail(request, user_pk):
+    # 요청으로 들어온 pk가 일치하는 유저 객체를 저장(조회하고자 하는 회원의 페이지)
+    info = get_user_model().objects.get(pk=user_pk)
+    context = {
+        "info" : info,
+    }
+    return render(request, "accounts/detail.html", context)
