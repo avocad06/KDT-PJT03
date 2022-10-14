@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+  <div>
+    {% for info in infos %}
+      <div>
+        <hr>
+        <a href="">
+          {{ info.username }}
+        </a>
+      </div>
+    {% endfor %}
+    <hr>
+  {% endblock %}
+</div>

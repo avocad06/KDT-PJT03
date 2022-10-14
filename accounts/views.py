@@ -45,3 +45,13 @@ def login(request):
         "forms" : forms,
     }
     return render(request, "accounts/login.html", context)
+
+def index(request):
+    # 회원 정보를 가지고 있는 유저 객체
+    infos = get_user_model().objects.all()
+    context = {
+        "infos" : infos,
+    }
+    
+    # 유저객체에 대한 정보를 템플릿에 출력한다.
+    return render(request, "accounts/index.html", context)
