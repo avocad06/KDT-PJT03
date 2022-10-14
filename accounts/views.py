@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from .forms import SignupForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
 from .forms import UpdateForm
 from django.contrib.auth.decorators import login_required
 
@@ -83,3 +84,7 @@ def update(request):
         "forms" : forms,
     }
     return render(request, "accounts/update.html", context)
+
+def logout(request):
+    auth_logout(request)
+    return render(request, "base.html")
