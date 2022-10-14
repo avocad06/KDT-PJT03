@@ -8,7 +8,9 @@
         {{ info.date_joined | date:"Y-n-j" }}
       </h6>
       <p class="card-text">{{ info.email }}</p>
-      <a href="#" class="card-link">Card link</a>
-    </div>
+      {% if user.pk == info.pk %}
+        <a href="{% url 'accounts:update' %}" class="card-link">회원 정보 수정</a>
+        {% endif %}
+      </div>
   </div>
 {% endblock %}
