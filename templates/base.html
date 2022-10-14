@@ -23,28 +23,34 @@
             Me
           </span>
         </a>
+        <!-- 반응형 웹 -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+        <!-- 네브바 링크 -->
         <div class="collapse navbar-collapse" id="navbarText">
           {% block authenticated %}
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0 fw-bold">
-            {% if user.is_authenticated %}
+          <!-- 로그인 상태에 따라 다른 화면 출력 -->
+          {% if user.is_authenticated %}
+          <span class="navbar-text p-0 w-100">
+            <a href="{% url 'accounts:detail' user.pk %}" class="nav-link">계정 | 
+              <span class="fw-bold">{{ user }}</span>
+            </a>
+          </span>
+          <ul class="navbar-nav w-100 mb-2 mb-lg-0 fw-bold justify-content-end">          
             <li class="nav-item">
               <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
             </li>
           </ul>
-          <span class="navbar-text p-0">
-            <a href="{% url 'accounts:detail' user.pk %}" class="nav-link">{{ user }}</a>
-          </span>
           {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'accounts:signup' %}">Join us</a>
-          </li>
-        </ul>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 fw-bold">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'accounts:signup' %}">Join us</a>
+            </li>
+          </ul>
           {% endif %}
           {% endblock %}
         </div>
@@ -52,7 +58,7 @@
     </nav>
     <div class="container p-5 d-flex align-items-center justify-content-center position-relative" style="height: 100vh">
       {% block aside %}
-      <div class="d-flex align-items-center fixed-bottom" style="width: 23%; padding: 2.5%; height: 20%; position: absolute; top: 20%;">
+      <div class="d-flex align-items-center fixed-bottom aside" style="width: 23%; padding: 2.5%; height: 20%; position: absolute; top: 20%;">
         <aside class="card w-100">
           <div class="card-header fw-bold">
             ÜwithMe
