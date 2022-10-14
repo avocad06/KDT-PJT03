@@ -42,6 +42,6 @@ def login(request):
         forms = AuthenticationForm()
         
     context = {
-        "forms" : forms
+        "forms" : forms,
     }
     return render(request, "accounts/login.html", context)
