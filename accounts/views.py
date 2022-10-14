@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from .forms import SignupForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login
+from .forms import UpdateForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def signup(request):
@@ -64,3 +66,20 @@ def detail(request, user_pk):
         "info" : info,
     }
     return render(request, "accounts/detail.html", context)
+
+# 회원 정보 수정
+@login_required
+def update(request):
+    if request.method == "POST":
+        forms = UpdateForm(request.POST, instance=request.user)
+        if forms.is_valid():
+            forms.save()
+            # 수정이 완료되면 수정한 회원의 정보 보기 페이지로 보낸다.
+            return redirect("accounts:detail", request.user.pk)
+    else:
+        forms = UpdateForm(instance=request.user)
+    
+    context = {
+        "forms" : forms,
+    }
+    return render(request, "accounts/update.html", context)
