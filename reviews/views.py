@@ -14,7 +14,7 @@ def create(request):
             forms.save()
             # 게시글 작성 후 제대로 작성됐는지 확인하도록 게시글 상세보기 페이지로 보낸다.
             # return redirect(request, "reviews/detail.html", Review.objects.all()[0].pk)
-            return render(request, 'base.html') 
+            return redirect('reviews:index') 
     # request.method 가 GET일 경우
     else:
         # 빈 폼
@@ -23,3 +23,10 @@ def create(request):
         "forms" : forms,
     }
     return render(request, "reviews/create.html", context)
+
+def index(request):
+    reviews = Review.objects.order_by("-pk")
+    context = {
+        "reviews" : reviews,
+    }
+    return render(request, "reviews/index.html", context)
