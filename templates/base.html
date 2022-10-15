@@ -59,17 +59,18 @@
     <div class="container p-5 d-flex align-items-center justify-content-center position-relative" style="height: 100vh">
       <!-- 페이지에 따라 안 보이게 할 수 있다 -->
       {% block aside %}
-      <div class="d-flex align-items-center fixed-bottom aside" style="width: 23%; padding: 2.5%; height: 20%; position: absolute; top: 20%;">
+      <div class="d-flex align-items-center fixed-bottom aside" style="width: 23%; padding: 2.5%; height: 20%; position: absolute; top: 20%; left: -10%;">
         <aside class="card w-100">
           <div class="card-header fw-bold">
             ÜwithMe
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item aside-list">
-
+              <a href="{% url 'reviews:index' %}" class="nav-link">Review</a>
             </li>
             {% if user.is_authenticated %}
             <li class="list-group-item aside-list">
+              <a href="{% url 'reviews:create' %}" class="nav-link">Post</a>
             </li>
             {% endif %}
           </ul>
