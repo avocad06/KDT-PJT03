@@ -36,8 +36,10 @@ def login(request):
         # 유효성 검사를 통과하면 세션에 저장한다.(내장함수 login으로)
         if forms.is_valid():
             auth_login(request, forms.get_user())
-            # 성공하면 base.html로 보낸다(아직 구현된 템플릿이 적으니까)
-            return render(request, "base.html")
+            # 로그인이 요구되는 페이지를 접근하기 위해 로그인한 경우
+            # 로그인이 성공하면 해당 페이지로 넘겨준다
+            # 로그인 후 요청되는 페이지가 없다면 메인 페이지로 넘겨준다.
+            return redirect(request.GET.get('next') or 'reviews:index')
     
     # request method가 GET 혹은 유효성 검사 실패한 사용자의 입력값이라면
     else:
@@ -87,4 +89,4 @@ def update(request):
 
 def logout(request):
     auth_logout(request)
-    return render(request, "base.html")
+    return redirect("reviews:index")
