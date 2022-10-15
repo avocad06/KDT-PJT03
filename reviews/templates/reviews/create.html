@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
+{% load django_bootstrap5 %}
 {% block content %}
-  <h1>함수 정상 작동 확인합니다.</h1>
+  <form action="" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form forms %}
+    <input type="submit" class="btn btn-primary">
+  </form>
 {% endblock %}
 {% block aside %}{% endblock %}
