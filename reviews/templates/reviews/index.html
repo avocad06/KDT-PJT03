@@ -23,7 +23,7 @@
 {% block content %}
   <p>
     {% for review in reviews %}
-      <a href="" class="nav-link">
+      <a href="{% url 'reviews:detail' review.pk %}" class="nav-link">
         {{ review.title }}
       </a>
     {% endfor %}
