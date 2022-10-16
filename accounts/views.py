@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def signup(request):
+    if request.user.is_authenticated:
+        return redirect('reviews:index')
     # 리퀘스트 메소드가 post일 땐
     # DB에 저장한다
     if request.method == "POST":
@@ -28,6 +30,8 @@ def signup(request):
     return render(request, "accounts/signup.html", context)
 
 def login(request):
+    if request.user.is_authenticated:
+        return redirect('reviews:index')        
     # request method가 POST일 때
     if request.method == "POST":
         # 사용자의 입력값을 받는다.

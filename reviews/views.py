@@ -27,6 +27,7 @@ def create(request):
 
 def index(request):
     reviews = Review.objects.order_by("-pk")
+    print(type(request))
     context = {
         "reviews" : reviews,
     }
