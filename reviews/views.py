@@ -27,7 +27,6 @@ def create(request):
 
 def index(request):
     reviews = Review.objects.order_by("-pk")
-    print(type(request))
     context = {
         "reviews" : reviews,
     }
@@ -58,4 +57,9 @@ def update(request, review_pk):
         "forms" : forms,
     }
     return render(request, "reviews/update.html", context)
-        
+
+def delete(request, review_pk):
+    review = Review.objects.get(pk=review_pk)
+    review.delete()
+    return redirect('reviews:index')
+    
